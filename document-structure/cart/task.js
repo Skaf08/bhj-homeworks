@@ -17,18 +17,9 @@ for(let i = 0;i < products.length;i++) {
     });
     cartAdd.addEventListener("click",add);
     function add(){
-        let cartProduct = document.getElementsByClassName("cart__product");
-        let ccount = document.getElementsByClassName("cart__product-count");
-        b=0;
-        for(j=0;j<cartProduct.length;j++) {
-            if(cartProduct[j].dataset.id==i+1) {
-                a = Number(ccount[j].textContent);
-                b = Number(number.textContent);
-                ccount[j].textContent = a+b;
-                b = 1;
-            } 
-        }
-        if (b == 0){
+        let cartProduct = Array.from(document.getElementsByClassName("cart__product"));
+        let check = cartProduct.find(element => element.dataset.id == i+1);
+        if (typeof(check) == 'undefined'){
             let product = document.createElement('div');
             let cartImg = document.createElement('img');
             let ccount = document.createElement('div');
@@ -41,6 +32,10 @@ for(let i = 0;i < products.length;i++) {
             cartImg.src = src;
             ccount.textContent = number.textContent;
             cart.append(product);
+        } else {
+            cartNumber = Number(check.querySelector('.cart__product-count').textContent);
+            let number1 = Number(number.textContent);
+            check.querySelector('.cart__product-count').textContent = cartNumber + number1;
         }
     }
 }
