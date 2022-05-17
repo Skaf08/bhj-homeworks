@@ -7,8 +7,7 @@ xhr.addEventListener("readystatechange", work);
 function work(e) {
     e.preventDefault();
     if(xhr.readyState === xhr.DONE) {
-        let data1 = JSON.parse(xhr.responseText);
-        console.log(data1);
+        const data1 = JSON.parse(xhr.responseText);
         let data = data1.response.Valute;
         for(let i in data) {
             let item = document.createElement("div")
